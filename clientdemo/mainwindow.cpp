@@ -12,19 +12,7 @@ const char* keys[8][5] = {
     {"SPACE","LEFTCTRL","M","N","B"}
 };
 
-/*int keytrack[8][5] = {
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0},
-    {0,0,0,0,0}
-};*/
-
 QPushButton *buttons[8][5];
-
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
@@ -36,7 +24,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
         for(int j=0;j<5;j++) {
             buttons[i][j] = new QPushButton(this);
             buttons[i][j]->setText(keys[i][j]);
-            //buttons[i][j]->setEnabled(false);
             hl[i]->addWidget(buttons[i][j]);
         }
         vl->addLayout(hl[i]);
@@ -45,10 +32,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // Setup socket and connect straight away
     socket = new QTcpSocket(this);
-    socket->setReadBufferSize(40);
     connect(socket, SIGNAL(readyRead()), this, SLOT(OnSocketRead()));
 
     socket->connectToHost(QHostAddress(HOST), 16384);
+    // If we connected, send a hello
     if(socket->isOpen()) {
         socket->write("hello",5);
     }
@@ -61,7 +48,6 @@ MainWindow::~MainWindow() {
 
 void MainWindow::OnSocketRead() {
     QByteArray result;
-    //result = socket->read(sizeof(keytrack));
     result = socket->read(160);
     int c = 0;
     for(int i=0;i<8;i++) {

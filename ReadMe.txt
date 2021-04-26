@@ -3,10 +3,12 @@ Proof of concept for reading keypresses on an original ZX Spectrum keyboard conn
 Building
 --------
 
-The server is a simple C program that can be built with (requires the wiringPi package to be installed):
+The server is a simple C program that can be built with:
 
 cd server
 cc -lwiringPi kbserv.c -o kbserv
+
+(requires the wiringPi package to be installed)
 
 The client demo is a QMake/Qt5 based C++ program that can be built from the command line or from within Qt Creator
 

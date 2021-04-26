@@ -42,10 +42,7 @@ void ProcessKeys(int sockfd) {
 
   char buf[5];
   bzero(buf,5);
-  
-  char sbuf[40];
-  bzero(sbuf, 40);
-  
+    
   printf("Reading hello from client.. ");
   read(sockfd,buf,5);
   printf("Done!\n");
@@ -140,10 +137,9 @@ int main() {
     printf("Connection established!\n");
   }  
 
+  // Do the thing!
   ProcessKeys(connfd);
-  
-  printf("Should never reach here!\n");
-  
-  // After chatting close the socket
+
+  // Close socket
   close(sockfd);
 }
