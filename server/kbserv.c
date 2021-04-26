@@ -48,9 +48,9 @@ void ProcessKeys(int sockfd) {
   
   printf("Reading hello from client.. ");
   read(sockfd,buf,5);
-  printf("Done! (%s)\n",buf);
+  printf("Done!\n");
         
- while(1) {
+  while(1) {
     // Only write to socket if there's a change     
     if(isChanged == 1) {
       printf("Writing to socket.. ");
