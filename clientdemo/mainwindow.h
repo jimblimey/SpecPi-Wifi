@@ -8,6 +8,9 @@
 #include <QTcpSocket>
 #include <QHostAddress>
 #include <QDebug>
+#ifdef Q_OS_WIN
+#include <Windows.h>
+#endif
 
 #define HOST "127.0.0.1"
 
